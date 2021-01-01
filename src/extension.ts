@@ -25,9 +25,9 @@ export function activate(context: vscode.ExtensionContext) {
 			await vscode.commands.executeCommand("workbench.action.closeSidebar");
 			await vscode.commands.executeCommand("workbench.view.extension.vscode-todo-sidebar-view");
 
-			setTimeout(() => {
-				vscode.commands.executeCommand("workbench.action.webview.openDeveloperTools");
-			}, 500);
+			// setTimeout(() => {
+			// 	vscode.commands.executeCommand("workbench.action.webview.openDeveloperTools");
+			// }, 500);
 		})
 	);
 
