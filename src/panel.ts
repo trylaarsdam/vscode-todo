@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { getNonce } from "./getNonce";
 
 export class HelloWorldPanel {
   /**
@@ -146,24 +147,18 @@ export class HelloWorldPanel {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src ${apiBaseUrl}; img-src https: data:; style-src 'unsafe-inline' ${
+        <meta http-equiv="Content-Security-Policy" content="img-src https: data:; style-src 'unsafe-inline' ${
       webview.cspSource
     }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="${stylesResetUri}" rel="stylesheet">
-				<link href="${stylesMainUri}" rel="stylesheet">
+				<link href="" rel="stylesheet">
         <link href="${cssUri}" rel="stylesheet">
         <script nonce="${nonce}">
-            const apiBaseUrl = ${JSON.stringify(apiBaseUrl)};
-            const tsvscode = acquireVsCodeApi();
-            let accessToken = ${JSON.stringify(Util.getAccessToken())};
-            let refreshToken = ${JSON.stringify(Util.getRefreshToken())};
-            ${FlairProvider.getJavascriptMapString()}
         </script>
 			</head>
       <body>
+            <h1> Hello World </h1>
 			</body>
-				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</html>`;
   }
 }
