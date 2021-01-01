@@ -10,14 +10,21 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-todo.helloWorld"
+    "onCommand:vscode-todo.helloWorld",
+    "onCommand:vscode-todo.askQuestion"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "vscode-todo.helloWorld",
+        "category": "VSTodo",
         "title": "Hello World"
+      },
+      {
+        "command": "vscode-todo.askQuestion",
+        "category": "VSTodo",
+        "title": "Ask Question"
       }
     ]
   },
