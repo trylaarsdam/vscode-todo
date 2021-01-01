@@ -28,7 +28,7 @@ export class HelloWorldPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       HelloWorldPanel.viewType,
-      "VSinder",
+      "VSTodo",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -114,27 +114,22 @@ export class HelloWorldPanel {
   private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
+      vscode.Uri.joinPath(this._extensionUri, "media", "main.js")
     );
-
-    // Local path to css styles
-    const styleResetPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "reset.css"
-    );
-    const stylesPathMainPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "vscode.css"
-    );
-
     // Uri to load styles into webview
-    const stylesResetUri = webview.asWebviewUri(styleResetPath);
-    const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
-    const cssUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
-    );
+    const stylesResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        this._extensionUri,
+        "media",
+        "reset.css"
+      ));
+    const stylesMainUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        this._extensionUri,
+        "media",
+        "vscode.css"
+      ));
+    // const cssUri = webview.asWebviewUri(
+    // vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
+    // );
 
     // Use a nonce to only allow specific scripts to be run
     const nonce = getNonce();
@@ -151,14 +146,18 @@ export class HelloWorldPanel {
       webview.cspSource
     }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="" rel="stylesheet">
-        <link href="${cssUri}" rel="stylesheet">
+                <link href="${stylesResetUri}" rel="stylesheet">
+                <link href="${stylesMainUri}" rel="stylesheet">
+
         <script nonce="${nonce}">
         </script>
 			</head>
       <body>
             <h1> Hello World </h1>
-			</body>
+            <input />
+            <button>Hello</button>
+            </body>
+            <script src="${scriptUri}" nonce="${nonce}">
 			</html>`;
   }
 }
