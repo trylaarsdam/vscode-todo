@@ -69,12 +69,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content="script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
         <link href="${styleMainUri}" rel="stylesheet">
-        
+        <script nonce="${nonce}>
+          const tsvscode = acquireVsCodeApi();
+        </script>
 			</head>
       <body>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
