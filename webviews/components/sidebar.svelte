@@ -10,7 +10,6 @@ import { loop_guard } from "svelte/internal";
         color: green;
     }
 </style>
-
 <form on:submit|preventDefault={() => {
     todos = [{text, completed: false}, ...todos];
     text = '';
