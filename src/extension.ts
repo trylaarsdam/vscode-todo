@@ -16,6 +16,13 @@ export function activate(context: vscode.ExtensionContext) {
 			HelloWorldPanel.createOrShow(context.extensionUri);
 		})
 	);
+	
+	const item = vscode.window.createStatusBarItem(
+		vscode.StatusBarAlignment.Right
+	);
+	item.text = "$(beaker) Add Todo";
+	item.command = "vscode-todo.addTodo";
+	item.show();
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.addTodo', () => {
