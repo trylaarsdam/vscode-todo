@@ -12,6 +12,16 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
+		vscode.commands.registerCommand('vscode-todo.refresh', () => {
+			HelloWorldPanel.kill();
+			HelloWorldPanel.createOrShow(context.extensionUri);
+			setTimeout(() => {
+				vscode.commands.executeCommand("workbench.action.webview.openDeveloperTools");
+			}, 500);
+		})
+	);
+
+	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.askQuestion', async () => {
 			const answer = await vscode.window.showInformationMessage("How was your day?", "good", "bad");
 
