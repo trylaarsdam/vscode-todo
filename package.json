@@ -13,7 +13,8 @@
     "onCommand:vscode-todo.helloWorld",
     "onCommand:vscode-todo.askQuestion",
     "onCommand:vscode-todo.refresh",
-    "onView:vscode-todo-sidebar"
+    "onView:vscode-todo-sidebar",
+    "onCommand:vscode-todo.addTodo"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -52,6 +53,11 @@
         "command": "vscode-todo.refresh",
         "category": "VSTodo",
         "title": "Refresh"
+      },
+      {
+        "command": "vscode-todo.addTodo",
+        "category": "VSTodo",
+        "title": "Add Todo from Selection"
       }
     ]
   },

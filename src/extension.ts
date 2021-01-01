@@ -18,6 +18,19 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
+		vscode.commands.registerCommand('vscode-todo.addTodo', () => {
+			const {activeTextEditor} = vscode.window;
+
+			if(!activeTextEditor){
+				vscode.window.showErrorMessage("No active text editor!");
+				return;
+			}
+			const text = activeTextEditor.document.getText(activeTextEditor.selection);
+			vscode.window.showInformationMessage("Todo Added: " + text);
+		})
+	);
+
+	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.refresh', async () => {
 			// HelloWorldPanel.kill();
 			// HelloWorldPanel.createOrShow(context.extensionUri);
