@@ -1,9 +1,15 @@
 import * as vscode from 'vscode';
 import { HelloWorldPanel } from './panel';
+import { SidebarProvider } from './SidebarProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Congratulations, your extension "vscode-todo" is now active!');
+	const sidebarProvider = new SidebarProvider(context.extensionUri);
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider(
+			"vscode-todo-sidebar", sidebarProvider
+		)
+	);
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.helloWorld', () => {
@@ -12,9 +18,13 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('vscode-todo.refresh', () => {
-			HelloWorldPanel.kill();
-			HelloWorldPanel.createOrShow(context.extensionUri);
+		vscode.commands.registerCommand('vscode-todo.refresh', async () => {
+			// HelloWorldPanel.kill();
+			// HelloWorldPanel.createOrShow(context.extensionUri);
+
+			await vscode.commands.executeCommand("workbench.action.closeSidebar");
+			await vscode.commands.executeCommand("workbench.view.extension.vscode-todo-sidebar-view");
+
 			setTimeout(() => {
 				vscode.commands.executeCommand("workbench.action.webview.openDeveloperTools");
 			}, 500);
