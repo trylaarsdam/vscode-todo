@@ -1,7 +1,23 @@
 <script lang="ts">
-import { loop_guard } from "svelte/internal";
+    import { loop_guard, onMount } from "svelte/internal";
     let todos: Array<{text: String, completed: boolean}> = [];
     let text = "";
+
+    onMount(() => {
+        window.addEventListener("message", (event) => {
+            const message = event.data;
+            console.log({message});
+            switch (message.type) {
+                case "newTodo":
+                    todos = [
+                        {text: message.value, completed: false},
+                        ...todos,
+                    ];
+                    break;
+            }
+        })
+    }
+    )
 </script>
 
 <style>

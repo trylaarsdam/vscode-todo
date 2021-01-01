@@ -26,7 +26,16 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			const text = activeTextEditor.document.getText(activeTextEditor.selection);
+			if(!text.trim().length){
+				vscode.window.showErrorMessage("Text selected was only spaces!");
+				return;
+			}
 			vscode.window.showInformationMessage("Todo Added: " + text);
+
+			sidebarProvider._view?.webview.postMessage({
+				type: 'newTodo',
+				value: text
+			});
 		})
 	);
 
