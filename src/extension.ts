@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.sendMessage', async () => {
-			let messageStatus = sendMessage("logs");
+			let messageStatus = sendMessage("logs", "test message from extension.ts");
 			
 			if(await messageStatus === true) {
 				vscode.window.showInformationMessage("Message Sent");
