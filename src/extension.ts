@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { HelloWorldPanel } from './panel';
-import { SidebarProvider } from './SidebarProvider';
+import { SidebarProvider } from './sidebars/SidebarProvider';
+import { TrekSidebarProvider } from './sidebars/TrekSidebarProvider';
 import { sendMessage } from './amqp';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -11,6 +12,13 @@ export function activate(context: vscode.ExtensionContext) {
 			"vscode-todo-sidebar", sidebarProvider
 		)
 	);
+	const trekSidebarProvider = new TrekSidebarProvider(context.extensionUri);
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider(
+			"trek-sidebar", trekSidebarProvider
+		)
+	);
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.helloWorld', () => {
 			HelloWorldPanel.createOrShow(context.extensionUri);

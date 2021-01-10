@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import { getNonce } from "./getNonce";
+import { getNonce } from "../getNonce";
 
-export class SidebarProvider implements vscode.WebviewViewProvider {
+export class TrekSidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
 
@@ -51,10 +51,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     );
     
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.js")
+      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/TrekSidebar.js")
     );
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.css")
+      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/TrekSidebar.css")
     );
 
 

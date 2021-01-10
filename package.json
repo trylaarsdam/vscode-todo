@@ -25,6 +25,11 @@
           "id": "vscode-todo-sidebar-view",
           "title": "VSTodo",
           "icon": "media/wcl.svg"
+        },
+        {
+          "id": "trek-sidebar-view",
+          "title": "Trek",
+          "icon": "media/server.svg"
         }
       ]
     },
@@ -36,6 +41,15 @@
           "name": "VSTodo",
           "icon": "media/wcl.svg",
           "contextualTitle": "VSTodo"
+        }
+      ],
+      "trek-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "trek-sidebar",
+          "name": "Trek",
+          "icon": "media/server.svg",
+          "contextualTitle": "Trek"
         }
       ]
     },
