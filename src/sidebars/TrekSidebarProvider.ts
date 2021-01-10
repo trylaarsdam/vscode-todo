@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce } from "../getNonce";
+import { sendMessage } from "../amqp";
 
 export class TrekSidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -19,22 +20,7 @@ export class TrekSidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
     webviewView.webview.onDidReceiveMessage(async (data): Promise<void> => {
-      switch(data.type){
-        case "onInfo": {
-          if (!data.value) {
-            return;
-          }
-          vscode.window.showInformationMessage(data.value);
-          break;
-        }
-        case "onError": {
-          if (!data.value) {
-            return;
-          }
-          vscode.window.showErrorMessage(data.value);
-          break;
-        }
-      }
+      sendMessage(data.exchange, data.value);
     });
   }
 

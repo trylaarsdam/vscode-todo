@@ -1,5 +1,13 @@
 <script lang="ts">
     import { loop_guard, onMount } from "svelte/internal";
+
+    let text = "";
+    let exchangeValue = "";
+
+    function publishMessage() {
+
+    }
+
 </script>
 
 <style>
@@ -9,16 +17,22 @@
     }
 </style>
 
-<button
-    on:click={() => {
-        tsvscode.postMessage({type: 'onInfo', value: 'info message'});
-    }}>
-    Info
-</button>
+<form on:submit|preventDefault={() => {
+
+    exchangeValue = '';
+    text = '';
+}}>
+    <input bind:value={exchangeValue} />
+    <input bind:value={text} />
+</form>
 
 <button
     on:click={() => {
-        tsvscode.postMessage({type: 'onError', value: 'error message'});
+        text = '';
+        exchangeValue = '';
+        
+        tsvscode.amqpPublish({exchange: exchangeValue, value: text});
+
     }}>
-    Error
+    Submit
 </button>
