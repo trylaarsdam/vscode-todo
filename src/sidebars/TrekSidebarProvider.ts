@@ -20,7 +20,8 @@ export class TrekSidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
     webviewView.webview.onDidReceiveMessage(async (data): Promise<void> => {
-      sendMessage(data.exchange, data.value);
+      sendMessage(data.type, data.value);
+      console.log("sent message");
     });
   }
 

@@ -28,10 +28,11 @@
 
 <button
     on:click={() => {
+
+        tsvscode.postMessage({type: exchangeValue, value: text});
+
         text = '';
         exchangeValue = '';
-        
-        tsvscode.amqpPublish({exchange: exchangeValue, value: text});
 
     }}>
     Submit
