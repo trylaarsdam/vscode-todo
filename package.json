@@ -14,7 +14,8 @@
     "onCommand:vscode-todo.askQuestion",
     "onCommand:vscode-todo.refresh",
     "onView:vscode-todo-sidebar",
-    "onCommand:vscode-todo.addTodo"
+    "onCommand:vscode-todo.addTodo",
+    "onCommand:vscode-todo.sendMessage"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -48,6 +49,11 @@
         "command": "vscode-todo.askQuestion",
         "category": "VSTodo",
         "title": "Ask Question"
+      },
+      {
+        "command": "vscode-todo.sendMessage",
+        "category": "Trek",
+        "title": "Send Message"
       },
       {
         "command": "vscode-todo.refresh",
@@ -98,5 +104,10 @@
     "vscode-test": "^1.4.1",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "@types/amqplib": "^0.5.17",
+    "@vertx/core": "^4.0.0",
+    "amqplib": "^0.4.2"
   }
 }

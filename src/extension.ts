@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { HelloWorldPanel } from './panel';
 import { SidebarProvider } from './SidebarProvider';
+import { sendMessage } from './amqp';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -10,13 +11,25 @@ export function activate(context: vscode.ExtensionContext) {
 			"vscode-todo-sidebar", sidebarProvider
 		)
 	);
-
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.helloWorld', () => {
 			HelloWorldPanel.createOrShow(context.extensionUri);
 		})
 	);
 	
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vscode-todo.sendMessage', () => {
+			let messageStatus = sendMessage();
+			
+			if(true === true) {
+				vscode.window.showInformationMessage("Message Sent");
+			}
+			else{
+				vscode.window.showErrorMessage("Error sending AMQP message");
+			}
+		})
+	);
+
 	const item = vscode.window.createStatusBarItem(
 		vscode.StatusBarAlignment.Right
 	);
