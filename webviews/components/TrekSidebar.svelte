@@ -32,7 +32,6 @@
         tsvscode.postMessage({type: exchangeValue, value: text});
 
         text = '';
-        exchangeValue = '';
 
     }}>
     Submit
