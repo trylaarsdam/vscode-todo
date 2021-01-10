@@ -18,10 +18,10 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	
 	context.subscriptions.push(
-		vscode.commands.registerCommand('vscode-todo.sendMessage', () => {
-			let messageStatus = sendMessage();
+		vscode.commands.registerCommand('vscode-todo.sendMessage', async () => {
+			let messageStatus = sendMessage("logs");
 			
-			if(true === true) {
+			if(await messageStatus === true) {
 				vscode.window.showInformationMessage("Message Sent");
 			}
 			else{
