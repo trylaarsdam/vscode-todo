@@ -3,6 +3,7 @@ import { HelloWorldPanel } from './panel';
 import { SidebarProvider } from './sidebars/SidebarProvider';
 import { TrekSidebarProvider } from './sidebars/TrekSidebarProvider';
 import { sendMessage } from './amqp';
+import { amqpDeactivate } from './amqp';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -95,4 +96,6 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 }
 
-export function deactivate() {}
+export function deactivate() {
+	amqpDeactivate();
+}

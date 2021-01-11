@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
 import { getNonce } from "../getNonce";
 import { sendMessage } from "../amqp";
+import { amqpConfigure } from '../amqp';
 
 export class TrekSidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
-
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   public resolveWebviewView(webviewView: vscode.WebviewView) {
@@ -30,6 +30,7 @@ export class TrekSidebarProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
+    amqpConfigure();
     const styleResetUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
     );

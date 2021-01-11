@@ -1,4 +1,5 @@
 import * as Amqp from "amqplib";
+import { once } from "process";
 
 var channel: import("bluebird") <Amqp.Channel>;
 
@@ -13,10 +14,18 @@ export async function sendMessage(exchangeName: string, message: string): Promis
     var exchange = (await channel).assertExchange(exchangeName, 'fanout', {durable: false}).then(async function(){
 		(await channel).publish(exchangeName, '', Buffer.from(message));
 	});
-
 	return true;
 }
 
-export function configure() {
+export function amqpConfigure() {
+	Amqp.connect("amqp://testing:password@trek.thewcl.com:5672").then(function(connection){
+    	channel = connection.createChannel();
+	}).catch(console.warn);
+	console.log("amqp.ts | connection established");
+	return true;
+}
 
+export async function amqpDeactivate() {
+	(await channel).close();
+	console.log("amqp.ts | AMQP channel closed.");
 }
