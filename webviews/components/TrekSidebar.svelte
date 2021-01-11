@@ -4,10 +4,7 @@
     let text = "";
     let exchangeValue = "";
 
-    function publishMessage() {
-
-    }
-
+    function publishMessage() {}
 </script>
 
 <style>
@@ -17,22 +14,20 @@
     }
 </style>
 
-<form on:submit|preventDefault={() => {
-
-    exchangeValue = '';
-    text = '';
-}}>
+<form
+    on:submit|preventDefault={() => {
+        exchangeValue = '';
+        text = '';
+    }}>
     <input bind:value={exchangeValue} />
     <input bind:value={text} />
 </form>
 
 <button
     on:click={() => {
-
-        tsvscode.postMessage({type: exchangeValue, value: text});
+        tsvscode.postMessage({ type: exchangeValue, value: text });
 
         text = '';
-
     }}>
     Submit
 </button>

@@ -25,15 +25,15 @@ export function activate(context: vscode.ExtensionContext) {
 			HelloWorldPanel.createOrShow(context.extensionUri);
 		})
 	);
-	
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.sendMessage', async () => {
 			let messageStatus = sendMessage("logs", "test message from extension.ts");
-			
-			if(await messageStatus === true) {
+
+			if (await messageStatus === true) {
 				vscode.window.showInformationMessage("Message Sent");
 			}
-			else{
+			else {
 				vscode.window.showErrorMessage("Error sending AMQP message");
 			}
 		})
@@ -48,14 +48,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vscode-todo.addTodo', () => {
-			const {activeTextEditor} = vscode.window;
+			const { activeTextEditor } = vscode.window;
 
-			if(!activeTextEditor){
+			if (!activeTextEditor) {
 				vscode.window.showErrorMessage("No active text editor!");
 				return;
 			}
 			const text = activeTextEditor.document.getText(activeTextEditor.selection);
-			if(!text.trim().length){
+			if (!text.trim().length) {
 				vscode.window.showErrorMessage("Text selected was only spaces!");
 				return;
 			}
@@ -86,11 +86,11 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('vscode-todo.askQuestion', async () => {
 			const answer = await vscode.window.showInformationMessage("How was your day?", "good", "bad");
 
-			if (answer === 'bad'){
+			if (answer === 'bad') {
 				vscode.window.showInformationMessage("Sorry to hear that");
 			}
 			else {
-				console.log({answer});
+				console.log({ answer });
 			}
 		})
 	);
